@@ -38,6 +38,8 @@ https://github.com/rizwan-amir123/content_factory
 ![Create Content Second](images/5.png)
 
 ## Project Structure
+
+```text
 src/
 ├── components/       # Reusable components
 ├── pages/            # Main pages (Login, Dashboard, Create, BatchDetail)
@@ -46,6 +48,7 @@ src/
 ├── App.js
 ├── index.js
 └── index.css
+```
 
 ## Quick Start
 
