@@ -37,6 +37,16 @@ https://github.com/rizwan-amir123/content_factory
 ![Create Content](images/4.png)
 ![Create Content Second](images/5.png)
 
+## Project Structure
+src/
+├── components/       # Reusable components
+├── pages/            # Main pages (Login, Dashboard, Create, BatchDetail)
+├── redux/            # Redux store & slices
+├── utils/            # API configuration
+├── App.js
+├── index.js
+└── index.css
+
 ## Quick Start
 
 ```bash
@@ -50,4 +60,6 @@ npm install
 # Start development server
 npm start
 The app will run at http://localhost:3000
-Project Structure
+
+
+
