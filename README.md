@@ -62,6 +62,8 @@ npm install
 
 # Start development server
 npm start
+```
+
 The app will run at http://localhost:3000
 
 
