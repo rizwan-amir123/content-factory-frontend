@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function App() {
+// Layout & Layout Partials
+import ProtectedLayout from './components/ProtectedLayout';
+
+// View Pages
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import BatchDetail from './pages/BatchDetail';
+import CreateContent from './pages/CreateContent';
+
+export default function App() {
+  const { accessToken } = useSelector((state) => state.auth);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Unauthenticated Gateway Routes */}
+        <Route path="/login" element={!accessToken ? <Login /> : <Navigate to="/dashboard" replace />} />
+        <Route path="/register" element={!accessToken ? <Register /> : <Navigate to="/dashboard" replace />} />
+
+        {/* Nested Protected Layout Window Routing Wrapper */}
+        <Route path="/" element={accessToken ? <ProtectedLayout /> : <Navigate to="/login" replace />}>
+          {/* Automatically injects dashboard into <Outlet /> if path matches base server index */}
+          <Route index element={<Navigate to="/dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="create" element={<CreateContent />} />
+          <Route path="batch/:id" element={<BatchDetail />} />
+        </Route>
+
+        {/* Global Structural Redirection Catchment */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
